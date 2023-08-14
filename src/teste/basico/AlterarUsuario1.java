@@ -6,20 +6,24 @@ import javax.persistence.Persistence;
 
 import modelo.basico.Usuario;
 
-public class NovoUsuario {
-
+public class AlterarUsuario1 {
 	public static void main(String[] args) {
-		
+
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Exercicios_JPA");
 		EntityManager em = emf.createEntityManager();
-		
-		Usuario novoUsuario=new Usuario("vilma","vilmasilv203@gmail.com");
 
 		em.getTransaction().begin();
-		em.persist(novoUsuario);
+
+		Usuario usuario = em.find(Usuario.class, 3L);
+
+		usuario.setNome("Vilma Oliveira");
+		usuario.setEmail("VilmaOliver2@gmail.com");
+
+		em.merge(usuario);// merge altera um dado no banco de dados
+
 		em.getTransaction().commit();
-		
 		em.close();
+
 		emf.close();
 	}
 }

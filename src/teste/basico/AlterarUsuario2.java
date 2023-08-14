@@ -6,20 +6,26 @@ import javax.persistence.Persistence;
 
 import modelo.basico.Usuario;
 
-public class NovoUsuario {
-
+public class AlterarUsuario2 {
 	public static void main(String[] args) {
-		
+
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Exercicios_JPA");
 		EntityManager em = emf.createEntityManager();
-		
-		Usuario novoUsuario=new Usuario("vilma","vilmasilv203@gmail.com");
 
 		em.getTransaction().begin();
-		em.persist(novoUsuario);
-		em.getTransaction().commit();
+
+		Usuario usuario = em.find(Usuario.class, 3L);
 		
+        em.detach(usuario);//objeto agora esta no estado nao gerenciado,ou seja,operacoes necessitam ser explicitas
+        
+		usuario.setNome("Vilma Oliveiras");
+		usuario.setEmail("VilmaOliver2@gmail.com");
+
+		em.merge(usuario);// merge altera um dado no banco de dados
+
+		em.getTransaction().commit();
 		em.close();
+
 		emf.close();
 	}
 }
