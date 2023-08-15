@@ -16,7 +16,8 @@ public class Assento {
 	
 	private String nome;
 	
-
+	@OneToOne(mappedBy = "assento")
+	private Cliente cliente;
 	
 	public Assento() {
 		// TODO Auto-generated constructor stub
@@ -42,6 +43,16 @@ public class Assento {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	
 
 
 	
