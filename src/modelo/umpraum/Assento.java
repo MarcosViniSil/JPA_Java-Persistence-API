@@ -1,29 +1,30 @@
-package modelo.basico;
+package modelo.umpraum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-
-public class Usuario  {
-
+@Table(name="assentos")
+public class Assento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	private String nome;
+	
 
-	private String email;
-
-	public Usuario() {
-
+	
+	public Assento() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(String nome, String email) {
+	public Assento(String nome) {
 		this.nome = nome;
-		this.email = email;
+		
 	}
 
 	public Long getId() {
@@ -42,12 +43,10 @@ public class Usuario  {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
+	
+	
+	
+	
 }
