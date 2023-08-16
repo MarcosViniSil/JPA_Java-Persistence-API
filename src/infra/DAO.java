@@ -1,5 +1,6 @@
 package infra;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,6 +73,21 @@ public class DAO<E> {
 	
 	public void fechar() {
 		em.close();
+	}
+	
+	public List<E> consultar(String nomeConsulta,Object... para){
+		TypedQuery<E> query=em.createNamedQuery(nomeConsulta, classe);
+		
+		for (int i = 0; i < para.length; i+=2) {
+			query.setParameter(para[i].toString(), para[i+1]);
+		}
+		
+		return query.getResultList();
+	}
+	
+	public E consultarum(String nomeConsulta,Object... para){
+	   List<E> lista=this.consultar(nomeConsulta, para);
+	   return lista.isEmpty() ? null: lista.get(0);
 	}
 
 }
